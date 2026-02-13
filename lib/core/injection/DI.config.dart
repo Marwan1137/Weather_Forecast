@@ -22,6 +22,7 @@ import '../../domain/repositories_contracts/weather_repository_contract.dart'
     as _i80;
 import '../../domain/usecase/getforecast_usecase.dart' as _i200;
 import '../../domain/usecase/getweather_usecase.dart' as _i107;
+import '../../presentation/cubit/cubit/weather_cubit.dart' as _i371;
 import '../network/api_client.dart' as _i557;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -48,6 +49,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i107.GetWeatherUsecase>(
       () => _i107.GetWeatherUsecase(repo: gh<_i80.WeatherRepositoryContract>()),
+    );
+    gh.factory<_i371.WeatherCubit>(
+      () => _i371.WeatherCubit(
+        getWeatherUsecase: gh<_i107.GetWeatherUsecase>(),
+        getForecastUsecase: gh<_i200.GetForecastUsecase>(),
+      ),
     );
     return this;
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:practice_test/core/injection/DI.dart';
+import 'package:practice_test/core/injection/di.dart';
 
 void main() async {
   // Load environment variables FIRST (ApiClient needs them)

@@ -41,6 +41,7 @@ dependencies:
   build_runner: ^2.11.1
   flutter_dotenv: ^6.0.0
   http: ^1.6.0
+  bloc: ^9.2.0
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,7 @@
-import 'package:injectable/injectable.dart';
-import 'package:practice_test/data/models/forecast_model.dart';
-import 'package:practice_test/data/models/weather_model.dart';
+import 'package:practice_test/domain/entities/forecast_entity.dart';
+import 'package:practice_test/domain/entities/weather_entity.dart';
 
 abstract class WeatherRepositoryContract {
-  Future<WeatherModel> getCurrentWeather(String cityName);
-  Future<List<ForecastModel>> getForecast(String cityName);
+  Future<Weather> getCurrentWeather(String cityName);
+  Future<List<Forecast>> getForecast(String cityName);
 }
