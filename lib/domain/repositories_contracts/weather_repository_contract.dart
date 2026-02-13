@@ -4,4 +4,6 @@ import 'package:practice_test/domain/entities/weather_entity.dart';
 abstract class WeatherRepositoryContract {
   Future<Weather> getCurrentWeather(String cityName);
   Future<List<Forecast>> getForecast(String cityName);
+  Future<Weather> getCurrentWeatherByCoords(double lat, double lon);
+  Future<List<Forecast>> getForecastByCoords(double lat, double lon);
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_test/core/injection/di.dart';
+import 'package:practice_test/presentation/cubit/cubit/weather_cubit.dart';
+import 'package:practice_test/presentation/splash/splash_screen.dart';
 
 void main() async {
   // Load environment variables FIRST (ApiClient needs them)
@@ -16,15 +19,19 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return BlocProvider(
+      create: (context) => getIt<WeatherCubit>(),
+      child: MaterialApp(
+        title: 'Weather',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          useMaterial3: true,
+        ),
+        home: const SplashScreen(),
       ),
-      home: const Scaffold(body: Center(child: Text('Hello World'))),
     );
   }
 }

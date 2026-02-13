@@ -18,4 +18,14 @@ class WeatherRepositoryImplementation implements WeatherRepositoryContract {
   Future<List<Forecast>> getForecast(String cityName) async {
     return await datasource.getForecast(cityName);
   }
+
+  @override
+  Future<Weather> getCurrentWeatherByCoords(double lat, double lon) async {
+    return await datasource.getCurrentWeatherByCoords(lat, lon);
+  }
+
+  @override
+  Future<List<Forecast>> getForecastByCoords(double lat, double lon) async {
+    return await datasource.getForecastByCoords(lat, lon);
+  }
 }

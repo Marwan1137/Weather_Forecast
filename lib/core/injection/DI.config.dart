@@ -20,6 +20,8 @@ import '../../data/repository_implementations/weather_repository_implementation.
     as _i237;
 import '../../domain/repositories_contracts/weather_repository_contract.dart'
     as _i80;
+import '../../domain/usecase/get_forecast_by_location_usecase.dart' as _i283;
+import '../../domain/usecase/get_weather_by_location_usecase.dart' as _i547;
 import '../../domain/usecase/getforecast_usecase.dart' as _i200;
 import '../../domain/usecase/getweather_usecase.dart' as _i107;
 import '../../presentation/cubit/cubit/weather_cubit.dart' as _i371;
@@ -43,6 +45,16 @@ extension GetItInjectableX on _i174.GetIt {
         datasource: gh<_i517.WeatherDatasourceContract>(),
       ),
     );
+    gh.factory<_i283.GetForecastByLocationUsecase>(
+      () => _i283.GetForecastByLocationUsecase(
+        repo: gh<_i80.WeatherRepositoryContract>(),
+      ),
+    );
+    gh.factory<_i547.GetWeatherByLocationUsecase>(
+      () => _i547.GetWeatherByLocationUsecase(
+        repo: gh<_i80.WeatherRepositoryContract>(),
+      ),
+    );
     gh.factory<_i200.GetForecastUsecase>(
       () =>
           _i200.GetForecastUsecase(repo: gh<_i80.WeatherRepositoryContract>()),
@@ -54,6 +66,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i371.WeatherCubit(
         getWeatherUsecase: gh<_i107.GetWeatherUsecase>(),
         getForecastUsecase: gh<_i200.GetForecastUsecase>(),
+        getWeatherByLocationUsecase: gh<_i547.GetWeatherByLocationUsecase>(),
+        getForecastByLocationUsecase: gh<_i283.GetForecastByLocationUsecase>(),
       ),
     );
     return this;

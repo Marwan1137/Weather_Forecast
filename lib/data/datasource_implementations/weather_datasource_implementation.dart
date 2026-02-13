@@ -61,4 +61,53 @@ class WeatherDatasourceImplementation implements WeatherDatasourceContract {
       throw ServerException('Failed to get forecast: ${e.toString()}');
     }
   }
+
+  @override
+  Future<WeatherModel> getCurrentWeatherByCoords(double lat, double lon) async {
+    try {
+      final queryParams = {
+        'lat': lat.toString(),
+        'lon': lon.toString(),
+        'appid': ApiConstants.apiKey,
+        'units': ApiConstants.units,
+      };
+      final response = await apiClient.get(
+        ApiConstants.currentWeather,
+        queryParameters: queryParams,
+      );
+      return WeatherModel.fromCurrentWeatherJson(response);
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(
+          'Failed to get current weather: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<List<ForecastModel>> getForecastByCoords(double lat, double lon) async {
+    try {
+      final queryParams = {
+        'lat': lat.toString(),
+        'lon': lon.toString(),
+        'appid': ApiConstants.apiKey,
+        'units': ApiConstants.units,
+      };
+      final response = await apiClient.get(
+        ApiConstants.forecast5Day,
+        queryParameters: queryParams,
+      );
+      final List<dynamic> forecastList =
+          response['list'] as List<dynamic>? ?? [];
+      return forecastList
+          .map(
+            (json) => ForecastModel.from5DayJson(json as Map<String, dynamic>),
+          )
+          .toList();
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      throw ServerException('Failed to get forecast: ${e.toString()}');
+    }
+  }
 }
