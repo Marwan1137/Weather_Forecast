@@ -3,8 +3,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:practice_test/core/injection/DI.dart';
 
 void main() async {
+  // Load environment variables FIRST (ApiClient needs them)
+  // Note: .env file is at lib/.env, and asset path in pubspec.yaml is lib/.env
+  await dotenv.load(fileName: "lib/.env");
+
+  // Then initialize dependency injection
   configureDependencies();
-  await dotenv.load(fileName: ".env");
+
   runApp(const MyApp());
 }
 

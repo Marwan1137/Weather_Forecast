@@ -12,13 +12,23 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../data/datasource_implementations/weather_datasource_implementation.dart'
+    as _i88;
+import '../network/api_client.dart' as _i557;
+
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    _i526.GetItHelper(this, environment, environmentFilter);
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.lazySingleton<_i557.ApiClient>(() => _i557.ApiClient());
+    gh.factory<_i88.WeatherDatasourceImplementation>(
+      () => _i88.WeatherDatasourceImplementation(
+        apiClient: gh<_i557.ApiClient>(),
+      ),
+    );
     return this;
   }
 }
