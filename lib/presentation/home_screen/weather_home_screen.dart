@@ -121,7 +121,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
     BuildContext context,
     Weather weather,
     List<({String dayLabel, String iconUrl, double tempHigh, double tempLow})>
-        dailyForecasts,
+    dailyForecasts,
     Color fg,
   ) {
     return Column(
@@ -141,8 +141,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
             },
             decoration: InputDecoration(
               hintText: 'Search for a city...',
-              hintStyle: TextStyle(
-                  color: fg.withOpacity(_kSecondaryOpacity)),
+              hintStyle: TextStyle(color: fg.withOpacity(_kSecondaryOpacity)),
               prefixIcon: Icon(Icons.search, color: fg),
               filled: true,
               fillColor: fg.withOpacity(0.15),
@@ -178,10 +177,9 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                     Icon(Icons.location_on, size: 22, color: fg),
                     Text(
                       weather.cityName,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(color: fg),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge?.copyWith(color: fg),
                     ),
                     Text(
                       DateFormat('EEEE, d MMMM').format(DateTime.now()),
@@ -196,9 +194,9 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                 Text(
                   '${weather.temperature.toStringAsFixed(0)}°',
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        color: fg,
-                        fontWeight: FontWeight.w300,
-                      ),
+                    color: fg,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
                 const SizedBox(height: _kSpacing8),
                 Image.network(
@@ -210,10 +208,9 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                 ),
                 Text(
                   weather.description,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(color: fg),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium?.copyWith(color: fg),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: _kSpacing24),
@@ -239,8 +236,9 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                       context,
                       icon: Icons.light_mode_outlined,
                       label: 'UV INDEX',
-                      value:
-                          weather.uvi != null ? '${weather.uvi!.round()}' : '—',
+                      value: weather.uvi != null
+                          ? '${weather.uvi!.round()}'
+                          : '—',
                       fg: fg,
                     ),
                   ],
@@ -251,9 +249,9 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                   child: Text(
                     '7-Day Forecast',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: fg,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      color: fg,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 const SizedBox(height: _kSpacing8),
@@ -299,8 +297,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
             style: TextStyle(color: fg),
             decoration: InputDecoration(
               hintText: 'Add a city...',
-              hintStyle: TextStyle(
-                  color: fg.withOpacity(_kSecondaryOpacity)),
+              hintStyle: TextStyle(color: fg.withOpacity(_kSecondaryOpacity)),
               prefixIcon: Icon(Icons.add_location_alt_outlined, color: fg),
               filled: true,
               fillColor: fg.withOpacity(0.15),
@@ -345,15 +342,13 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                       padding: const EdgeInsets.only(bottom: _kSpacing8),
                       child: Material(
                         color: fg.withOpacity(0.12),
-                        borderRadius:
-                            BorderRadius.circular(_kRadius),
+                        borderRadius: BorderRadius.circular(_kRadius),
                         child: InkWell(
                           onTap: () {
                             context.read<WeatherCubit>().loadByCity(city);
                             setState(() => _selectedTabIndex = 0);
                           },
-                          borderRadius:
-                              BorderRadius.circular(_kRadius),
+                          borderRadius: BorderRadius.circular(_kRadius),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: _kSpacing16,
@@ -369,10 +364,9 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                                 const SizedBox(width: _kSpacing16),
                                 Text(
                                   city,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(color: fg),
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.titleMedium?.copyWith(color: fg),
                                 ),
                               ],
                             ),
@@ -390,10 +384,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
   Widget _bottomNav(BuildContext context, Color fg) {
     final bottomPadding = MediaQuery.of(context).padding.bottom;
     const labels = ['Forecast', 'Cities'];
-    const icons = [
-      Icons.calendar_today_outlined,
-      Icons.location_city_outlined,
-    ];
+    const icons = [Icons.calendar_today_outlined, Icons.location_city_outlined];
     return Container(
       padding: EdgeInsets.only(
         top: _kSpacing16,
@@ -403,9 +394,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
       ),
       decoration: BoxDecoration(
         color: fg.withOpacity(0.12),
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(_kRadius * 2),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(_kRadius * 2)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -484,8 +473,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
   }) {
     return Container(
       width: 72,
-      padding: const EdgeInsets.symmetric(
-          vertical: 12, horizontal: _kSpacing8),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: _kSpacing8),
       decoration: BoxDecoration(
         color: fg.withOpacity(0.12),
         borderRadius: BorderRadius.circular(_kRadius),
